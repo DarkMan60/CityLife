@@ -37,10 +37,44 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          api-level: 34
-          ndk-version: r26c
-          build-tools: 34.0.0
-          cmake-version: 3.22.1
+          packages: |
+            platform-tools
+            platforms;android-34
+            build-tools;34.0.0
+            ndk;26.3.11579264
+            cmake;3.22.1
+
+      # 4. Verify Android SDK installation
+      - name: Verify Android SDK
+        run: |
+          echo "=== Android SDK Verification ==="
+          echo "ANDROID_HOME: $ANDROID_HOME"
+          echo "ANDROID_NDK_HOME: $ANDROID_NDK_HOME"
+          echo ""
+          echo "Installed platforms:"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep "platforms;" || true
+          echo ""
+          echo "Installed build-tools:"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep "build-tools;" || true
+          echo ""
+          echo "Installed NDK:"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep "ndk;" || true
+          echo ""
+          echo "Installed CMake:"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep "cmake;" || true
+          echo ""
+          echo "Platform tools:"
+          ls -la $ANDROID_HOME/platform-tools/adb
+          echo ""
+          # Verify specific required packages
+          echo "Verifying required packages..."
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep -q "platforms;android-34" && echo "✅ android-34 platform installed" || (echo "❌ android-34 platform MISSING" && exit 1)
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep -q "build-tools;34.0.0" && echo "✅ build-tools 34.0.0 installed" || (echo "❌ build-tools 34.0.0 MISSING" && exit 1)
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep -q "ndk;26.3.11579264" && echo "✅ NDK 26.3.11579264 installed" || (echo "❌ NDK 26.3.11579264 MISSING" && exit 1)
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep -q "cmake;3.22.1" && echo "✅ CMake 3.22.1 installed" || (echo "❌ CMake 3.22.1 MISSING" && exit 1)
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed | grep -q "platform-tools" && echo "✅ platform-tools installed" || (echo "❌ platform-tools MISSING" && exit 1)
+          echo ""
+          echo "=== All required SDK packages verified ==="
 
       # 4. Install Godot 4.3+
       - name: Install Godot
