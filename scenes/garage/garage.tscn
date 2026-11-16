@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid://g1a2r3a4g5e6]
+
+[ext_resource type="Script" path="res://scripts/garage/garage.gd" id="1"]
+
+[node name="Garage" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+
+[node name="Garage/Background" type="Panel" parent="Garage"]
+anchors_preset = 15
+
+[node name="Garage/Background/StyleBoxFlat" type="StyleBoxFlat" parent="Garage/Background"]
+bg_color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Garage/Title" type="Label" parent="Garage"]
+anchors_preset = 10
+offset_left = 20
+offset_top = 20
+offset_right = -20
+offset_bottom = 0
+text = "GARAGE"
+horizontal_alignment = 1
+font_size = 48
+font_color = Color(1, 0.85, 0, 1)
+
+[node name="Garage/VehicleList" type="ItemList" parent="Garage"]
+anchors_preset = 9
+offset_left = 20
+offset_top = 100
+offset_right = -20
+offset_bottom = 100
+
+[node name="Garage/BuyBtn" type="Button" parent="Garage"]
+anchors_preset = 12
+offset_left = 20
+offset_top = -80
+offset_right = 180
+offset_bottom = -20
+text = "Buy Selected"
+custom_minimum_size = Vector2(0, 50)
+font_size = 24
+
+[node name="Garage/SellBtn" type="Button" parent="Garage"]
+anchors_preset = 12
+offset_left = 200
+offset_top = -80
+offset_right = 360
+offset_bottom = -20
+text = "Sell Selected"
+custom_minimum_size = Vector2(0, 50)
+font_size = 24
+
+[node name="Garage/BackBtn" type="Button" parent="Garage"]
+anchors_preset = 12
+offset_left = 380
+offset_top = -80
+offset_right = 540
+offset_bottom = -20
+text = "Back to Menu"
+custom_minimum_size = Vector2(0, 50)
+font_size = 24
+
+[node name="Garage/MoneyLabel" type="Label" parent="Garage"]
+anchors_preset = 11
+offset_left = 20
+offset_top = -80
+offset_right = -20
+offset_bottom = -20
+text = "Money: $0"
+horizontal_alignment = 2
+font_size = 24
+font_color = Color(0, 1, 0.5, 1)

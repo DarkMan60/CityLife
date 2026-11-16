@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=3 uid://m1a2p3v4i5e6]
+
+[ext_resource type="Script" path="res://scripts/map/map_view.gd" id="1"]
+
+[node name="MapView" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+offset_left = 0
+offset_top = 0
+offset_right = 0
+offset_bottom = 0
+
+[node name="Background/StyleBox" type="StyleBoxFlat" parent="Background"]
+bg_color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="MapContainer" type="Control" parent="."]
+anchors_preset = 15
+offset_left = 50
+offset_top = 50
+offset_right = -50
+offset_bottom = -50
+
+[node name="MapContainer/Title" type="Label" parent="MapContainer"]
+position = Vector2(0, 0)
+text = "CITY MAP"
+horizontal_alignment = 1
+font_size = 48
+font_color = Color(1, 0.85, 0, 1)
+custom_minimum_size = Vector2(0, 80)
+
+[node name="MapContainer/MapViewport" type="SubViewport" parent="MapContainer"]
+anchors_preset = 15
+offset_left = 0
+offset_top = 100
+offset_right = 0
+offset_bottom = -80
+
+[node name="MapContainer/MapViewport/MapCamera" type="Camera3D" parent="MapContainer/MapViewport"]
+position = Vector3(0, 500, 0)
+rotation = Vector3(-PI/2, 0, 0)
+fov = 60
+near = 0.1
+far = 2000
+environment = Environment.new()
+environment.background_mode = Environment.BACKGROUND_CANVAS
+
+[node name="MapContainer/MapTexture" type="TextureRect" parent="MapContainer"]
+anchors_preset = 15
+offset_left = 0
+offset_top = 100
+offset_right = 0
+offset_bottom = -80
+stretch_mode = 1
+
+[node name="MapContainer/Legend" type="HBoxContainer" parent="MapContainer"]
+anchors_preset = 10
+offset_left = 20
+offset_top = -60
+offset_right = -20
+offset_bottom = -10
+alignment = 1
+
+[node name="MapContainer/Legend/PlayerMarker" type="HBoxContainer" parent="MapContainer/Legend"]
+custom_minimum_size = Vector2(150, 30)
+
+[node name="MapContainer/Legend/PlayerMarker/Icon" type="TextureRect" parent="MapContainer/Legend/PlayerMarker"]
+custom_minimum_size = Vector2(20, 20)
+modulate = Color(0, 1, 0)
+
+[node name="MapContainer/Legend/PlayerMarker/Label" type="Label" parent="MapContainer/Legend/PlayerMarker"]
+text = "Player"
+font_size = 16
+font_color = Color.WHITE
+
+[node name="MapContainer/Legend/MissionMarker" type="HBoxContainer" parent="MapContainer/Legend"]
+custom_minimum_size = Vector2(150, 30)
+
+[node name="MapContainer/Legend/MissionMarker/Icon" type="TextureRect" parent="MapContainer/Legend/MissionMarker"]
+custom_minimum_size = Vector2(20, 20)
+modulate = Color(1, 0.85, 0, 1)
+
+[node name="MapContainer/Legend/MissionMarker/Label" type="Label" parent="MapContainer/Legend/MissionMarker"]
+text = "Active Mission"
+font_size = 16
+font_color = Color.WHITE
+
+[node name="MapContainer/Legend/PoliceMarker" type="HBoxContainer" parent="MapContainer/Legend"]
+custom_minimum_size = Vector2(150, 30)
+
+[node name="MapContainer/Legend/PoliceMarker/Icon" type="TextureRect" parent="MapContainer/Legend/PoliceMarker"]
+custom_minimum_size = Vector2(20, 20)
+modulate = Color(0, 0.5, 1, 1)
+
+[node name="MapContainer/Legend/PoliceMarker/Label" type="Label" parent="MapContainer/Legend/PoliceMarker"]
+text = "Police"
+font_size = 16
+font_color = Color.WHITE
+
+[node name="MapContainer/BackBtn" type="Button" parent="MapContainer"]
+position = Vector2(20, -60)
+text = "Back"
+custom_minimum_size = Vector2(120, 40)
+font_size = 20

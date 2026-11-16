@@ -1,0 +1,464 @@
+[application]
+
+config/name="City Life"
+config/icon="res://assets/textures/icon.png"
+config/main_scene="res://scenes/main_menu/main_menu.tscn"
+run/low_processor_mode_sleep_usec=0
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=true
+window/size/fullscreen_mode=2
+window/vsync_mode=1
+rendering/renderer/rendering_method="mobile"
+rendering/quality/shadows/quality=1
+rendering/quality/reflections/ssrr=true
+rendering/quality/reflections/ssrr_roughness_quality=1
+rendering/quality/ssao/enabled=true
+rendering/quality/ssao/quality=1
+rendering/quality/canvas_textures/default_texture_filter=1
+rendering/quality/canvas_textures/default_texture_repeat=0
+rendering/limits/rendering/max_elements_per_frame=200000
+rendering/limits/time/max_render_time=1000
+rendering/environment/defaults/default_clear_color=Color(0.1, 0.15, 0.2, 1)
+rendering/environment/defaults/default_environment="res://assets/environments/default_env.tres"
+
+[input]
+
+move_left={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 65,
+		"keycode": 65,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 0,
+		"axis_value": -1.0
+	}
+]
+}
+move_right={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 68,
+		"keycode": 68,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 0,
+		"axis_value": 1.0
+	}
+]
+}
+move_forward={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 87,
+		"keycode": 87,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 1,
+		"axis_value": -1.0
+	}
+]
+}
+move_backward={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 83,
+		"keycode": 83,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 1,
+		"axis_value": 1.0
+	}
+]
+}
+sprint={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 16,
+		"keycode": 65505,
+		"pressed": true,
+		"shift_pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 11,
+		"pressed": true
+	}
+]
+}
+jump={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 32,
+		"keycode": 32,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 0,
+		"pressed": true
+	}
+]
+}
+crouch={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 17,
+		"keycode": 65507,
+		"pressed": true,
+		"ctrl_pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 12,
+		"pressed": true
+	}
+]
+}
+interact={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 69,
+		"keycode": 69,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 1,
+		"pressed": true
+	}
+]
+}
+attack={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventMouseButton",
+		"button_index": 1,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 2,
+		"pressed": true
+	}
+]
+}
+aim={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventMouseButton",
+		"button_index": 3,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 10,
+		"pressed": true
+	}
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 27,
+		"keycode": 65307,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 9,
+		"pressed": true
+	}
+]
+}
+vehicle_accelerate={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 87,
+		"keycode": 87,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 13,
+		"pressed": true
+	}
+]
+}
+vehicle_brake={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 83,
+		"keycode": 83,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 14,
+		"pressed": true
+	}
+]
+}
+vehicle_steer_left={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 65,
+		"keycode": 65,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 2,
+		"axis_value": -1.0
+	}
+]
+}
+vehicle_steer_right={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 68,
+		"keycode": 68,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 2,
+		"axis_value": 1.0
+	}
+]
+}
+vehicle_handbrake={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 32,
+		"keycode": 32,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 0,
+		"pressed": true
+	}
+]
+}
+vehicle_exit={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 70,
+		"keycode": 70,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 1,
+		"pressed": true
+	}
+]
+}
+camera_horizontal={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventMouseMotion"
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 2,
+		"axis_value": 1.0
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 3,
+		"axis_value": -1.0
+	}
+]
+}
+camera_vertical={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventMouseMotion"
+	},
+	{
+		"type": "InputEventJoypadMotion",
+		"axis": 3,
+		"axis_value": 1.0
+	}
+]
+}
+next_weapon={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 61,
+		"keycode": 61,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 15,
+		"pressed": true
+	}
+]
+}
+prev_weapon={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 45,
+		"keycode": 45,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 14,
+		"pressed": true
+	}
+]
+}
+reload={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 82,
+		"keycode": 82,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 4,
+		"pressed": true
+	}
+]
+}
+weapon_wheel={
+"deadzone": 0.5,
+"events": [
+	{
+		"type": "InputEventKey",
+		"physical_keycode": 9,
+		"keycode": 65288,
+		"pressed": true
+	},
+	{
+		"type": "InputEventJoypadButton",
+		"button_index": 9,
+		"pressed": true
+	}
+]
+}
+
+[autoload]
+
+GameManager="*res://autoload/game_manager.gd"
+InputManager="*res://autoload/input_manager.gd"
+SaveManager="*res://autoload/save_manager.gd"
+AudioManager="*res://autoload/audio_manager.gd"
+UIManager="*res://autoload/ui_manager.gd"
+WorldManager="*res://autoload/world_manager.gd"
+MissionManager="*res://autoload/mission_manager.gd"
+PoliceManager="*res://autoload/police_manager.gd"
+VehicleManager="*res://autoload/vehicle_manager.gd"
+PedestrianManager="*res://autoload/pedestrian_manager.gd"
+TrafficManager="*res://autoload/traffic_manager.gd"
+GraphicsSettings="*res://autoload/graphics_settings.gd"
+WeaponManager="*res://autoload/weapon_manager.gd"
+CameraManager="*res://autoload/camera_manager.gd"
+LODManager="*res://autoload/lod_manager.gd"
+
+[physics]
+
+common/physics_ticks_per_second=60
+3d/physics/3d/solver_iterations=8
+3d/physics/3d/default_solver_accuracy=1.0
+3d/physics/3d/default_contact_margin=0.04
+
+[rendering]
+
+rendering/quality/depth_prepass/enabled=true
+rendering/quality/depth_prepass/readback_mode=0
+rendering/quality/filters/bicubic_upscale=true
+rendering/quality/filters/fsr_mode=0
+rendering/quality/shadows/atlas_size=2048
+rendering/quality/shadows/max_directional_lights=2
+rendering/quality/shadows/max_dual_parabola_lights=2
+rendering/quality/shadows/max_spot_lights=4
+rendering/quality/shadows/max_omni_lights=2
+rendering/quality/ssao/half_resolution=false
+rendering/quality/ssao/bilateral_sharpness=1.5
+rendering/quality/ssil/enabled=true
+rendering/quality/ssr/enabled=true
+rendering/quality/ssr/roughness_quality=1
+rendering/quality/decal/atlas_size=1024
+rendering/quality/lightmap/max_lightmaps=8
+rendering/quality/gi/voxel_gi/enabled=false
+rendering/quality/gi/voxel_gi/subdivs=6
+rendering/quality/gi/sdfgi/enabled=false
+rendering/quality/gi/sdfgi/cascades=8
+rendering/quality/reflection_probes/max_reflection_probes=16
+rendering/quality/reflection_probes/atlas_size=2048
+rendering/quality/particles/collision_max_particles=1000
+rendering/quality/particles/max_emission_per_frame=1000
+rendering/quality/particles/subpixel_accuracy=true
+rendering/quality/lod/mesh_lod_threshold=0.1
+rendering/quality/lod/particle_lod_threshold=0.1
+rendering/quality/lod/cross_fade_margin=1.0
+rendering/quality/occlusion_culling/enabled=true
+rendering/quality/occlusion_culling/use_occluders=true
+rendering/quality/occlusion_culling/use_portals=true
+rendering/quality/reflections/ssrr_roughness_quality=1
+rendering/quality/reflections/ssrr_samples=16
+
+[global_classes]
+
+CharacterBody3D="res://scripts/core/character_body_3d.gd"
+VehicleBody3D="res://scripts/core/vehicle_body_3d.gd"
+StaticBody3D="res://scripts/core/static_body_3d.gd"
+RigidBody3D="res://scripts/core/rigid_body_3d.gd"

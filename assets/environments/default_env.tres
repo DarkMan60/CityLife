@@ -1,0 +1,43 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid://d3f4g5h6j7k8]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial"]
+sun_color = Color(1, 0.95, 0.8)
+sun_energy = 1.0
+sun_latitude = 0.0
+sun_longitude = 0.0
+sun_angular_distance = 0.53
+ground_color = Color(0.3, 0.25, 0.2)
+energy_multiplier = 1.0
+glow_enabled = false
+glow_amount = 0.0
+glow_size = 0.0
+glow_compression = 0.0
+
+[resource]
+background_mode = 2
+background_sky = SubResource("PhysicalSkyMaterial")
+background_energy = 1.0
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.5
+ssao_quality = 1
+ssao_blur = 1.0
+ssr_enabled = true
+ssr_max_steps = 64
+ssr_fade_in = 0.0
+ssr_fade_out = 0.0
+ssr_depth_tolerance = 0.1
+bloom_enabled = true
+bloom_intensity = 0.8
+bloom_threshold = 0.8
+bloom_scale = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.0
+adjustment_brightness = 0.0
+adjustment_saturation = 1.0
+fog_enabled = false
+fog_density = 0.0
+fog_light_color = Color(0.5, 0.5, 0.6)
+fog_aerial_perspective = true
+fog_height = 0.0
+fog_height_density = 0.5

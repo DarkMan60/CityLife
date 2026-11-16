@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid://m1n2u3m4e5n6]
+
+[ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/city/city_environment.tscn" id="2"]
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1")
+
+[node name="BackgroundCity" type="Node3D" parent="."]
+instance = ExtResource("2")
+position = Vector3(0, -50, 0)
+
+[node name="MenuCamera" type="Camera3D" parent="."]
+position = Vector3(0, 50, 80)
+rotation = Vector3(-0.5, 0, 0)
+fov = 60
+near = 0.1
+far = 2000
+environment = Environment.new()
+environment.background_mode = Environment.BACKGROUND_SKY
+environment.sky = PhysicalSkyMaterial.new()
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+position = Vector3(0, 100, 0)
+rotation = Vector3(-0.785, 0.785, 0)
+light_color = Color(1, 0.95, 0.8)
+light_energy = 2.0
+light_size = 0.53
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="UICanvas/MenuPanel" type="Panel" parent="UICanvas"]
+anchors_preset = 15
+offset_left = 0
+offset_top = 0
+offset_right = 0
+offset_bottom = 0
+
+[node name="UICanvas/MenuPanel/VBoxContainer" type="VBoxContainer" parent="UICanvas/MenuPanel"]
+anchors_preset = 9
+offset_left = 200
+offset_top = 150
+offset_right = -200
+offset_bottom = -150
+alignment = 1
+
+[node name="UICanvas/MenuPanel/VBoxContainer/Title" type="Label" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "CITY LIFE"
+horizontal_alignment = 1
+font_size = 72
+font_color = Color(1, 0.85, 0, 1)
+
+[node name="UICanvas/MenuPanel/VBoxContainer/Subtitle" type="Label" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "GTA 5 Inspired Open World"
+horizontal_alignment = 1
+font_size = 20
+font_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="UICanvas/MenuPanel/VBoxContainer/HSeparator" type="HSeparator" parent="UICanvas/MenuPanel/VBoxContainer"]
+
+[node name="UICanvas/MenuPanel/VBoxContainer/NewGameBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "New Game"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/LoadGameBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Load Game"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/SettingsBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Settings"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/GarageBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Garage"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/MissionsBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Missions"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/MapBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Map"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/QuitBtn" type="Button" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "Quit"
+custom_minimum_size = Vector2(0, 60)
+font_size = 28
+
+[node name="UICanvas/MenuPanel/VBoxContainer/Version" type="Label" parent="UICanvas/MenuPanel/VBoxContainer"]
+text = "v1.0.0 - Godot 4.3"
+horizontal_alignment = 1
+font_size = 14
+font_color = Color(0.5, 0.5, 0.5, 1)

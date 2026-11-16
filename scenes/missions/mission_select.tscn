@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid://b1o2x3z4y5m6]
+
+[ext_resource type="Script" path="res://scripts/missions/mission_select.gd" id="1"]
+
+[node name="MissionSelect" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+offset_left = 0
+offset_top = 0
+offset_right = 0
+offset_bottom = 0
+
+[node name="Background/StyleBox" type="StyleBoxFlat" parent="Background"]
+bg_color = Color(0, 0, 0, 0.9)
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchors_preset = 9
+offset_left = 100
+offset_top = 100
+offset_right = -100
+offset_bottom = -100
+alignment = 1
+
+[node name="Container/Title" type="Label" parent="Container"]
+text = "SELECT MISSION"
+horizontal_alignment = 1
+font_size = 48
+font_color = Color(1, 0.85, 0, 1)
+
+[node name="Container/HSeparator" type="HSeparator" parent="Container"]
+
+[node name="Container/MissionList" type="ScrollContainer" parent="Container"]
+custom_minimum_size = Vector2(0, 400)
+
+[node name="Container/MissionList/VBoxContainer" type="VBoxContainer" parent="Container/MissionList"]
+alignment = 1
+
+[node name="Container/BackBtn" type="Button" parent="Container"]
+text = "Back"
+custom_minimum_size = Vector2(200, 50)
+font_size = 24

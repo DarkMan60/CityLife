@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="taxi" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "taxi"
+vehicle_name = "Taxi"
+vehicle_class = COMMERCIAL
+price = 0
+stats = {'speed': 70, 'acceleration': 65, 'handling': 65, 'braking': 70, 'durability': 75}
+
+[node name="taxi/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.2, 1.6, 4.9)
+position = Vector3(0, 0.8, 0)
+
+[node name="taxi/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(2.0, 1.4, 4.6)
+position = Vector3(0, 0.7999999999999999, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(1.0, 0.9, 0.0, 1)
+
+[node name="taxi/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.6, 1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="taxi/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.6, 1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="taxi/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.6, -1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="taxi/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.6, -1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="zentorno" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "zentorno"
+vehicle_name = "Zentorno"
+vehicle_class = SPORTS
+price = 300000
+stats = {'speed': 100, 'acceleration': 99, 'handling': 92, 'braking': 92, 'durability': 45}
+
+[node name="zentorno/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.05, 1.0, 4.1)
+position = Vector3(0, 0.5, 0)
+
+[node name="zentorno/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(1.85, 0.8, 3.8)
+position = Vector3(0, 0.5, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.6, 0.1, 0.8, 1)
+
+[node name="zentorno/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.02, 0.4, 1.6)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="zentorno/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.02, 0.4, 1.6)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="zentorno/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.02, 0.4, -1.6)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="zentorno/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.02, 0.4, -1.6)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

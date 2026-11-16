@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid://b3f8k2m9n1p4]
+
+[ext_resource type="Script" path="res://scripts/player/player_character.gd" id="1"]
+
+[sub_resource type="CapsuleShape3D" id="CollisionShape3D"]
+height = 1.8
+radius = 0.4
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine"]
+nodes = {
+"Ide": AnimationNodeAnimation.new(),
+"Walk": AnimationNodeAnimation.new(),
+"Run": AnimationNodeAnimation.new(),
+"Sprint": AnimationNodeAnimation.new(),
+"Crouch": AnimationNodeAnimation.new(),
+"Aim": AnimationNodeBlendSpace1D.new(),
+"Jump": AnimationNodeAnimation.new(),
+"Swim": AnimationNodeAnimation.new(),
+"SwimIdle": AnimationNodeAnimation.new(),
+"MeleeAttack": AnimationNodeAnimation.new(),
+"Shoot": AnimationNodeAnimation.new(),
+"Reload": AnimationNodeAnimation.new(),
+"Hurt": AnimationNodeAnimation.new()
+}
+transitions = {}
+start_node = "Ide"
+
+[sub_resource type="AnimationTree" id="AnimationTree"]
+tree_root = SubResource("AnimationNodeStateMachine")
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CollisionShape3D")
+position = Vector3(0, 0.9, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = CylinderMesh.new()
+mesh.height = 1.8
+mesh.top_radius = 0.4
+mesh.bottom_radius = 0.4
+
+[node name="CameraPivot" type="Node3D" parent="."]
+position = Vector3(0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+position = Vector3(0, 0, 4)
+fov = 75
+near = 0.1
+far = 2000
+environment = Environment.new()
+environment.background_mode = Environment.BACKGROUND_SKY
+environment.sky = PhysicalSkyMaterial.new()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine")
+active = true

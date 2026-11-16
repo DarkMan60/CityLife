@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="bati_801" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "bati_801"
+vehicle_name = "Bati 801"
+vehicle_class = MOTORCYCLE
+price = 55000
+stats = {'speed': 97, 'acceleration': 95, 'handling': 92, 'braking': 88, 'durability': 35}
+
+[node name="bati_801/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(0.85, 1.15, 2.3)
+position = Vector3(0, 0.575, 0)
+
+[node name="bati_801/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(0.75, 1.05, 2.1)
+position = Vector3(0, 0.625, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.0, 0.0, 0.0, 1)
+
+[node name="bati_801/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(0.38, 0.38, 0.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="bati_801/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-0.38, 0.38, 0.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="bati_801/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(0.38, 0.38, -0.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="bati_801/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-0.38, 0.38, -0.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

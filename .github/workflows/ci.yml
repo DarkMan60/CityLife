@@ -1,0 +1,210 @@
+name: CI - Validate & Export Android APK
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.3"
+  GODOT_VERSION_FULL: "4.3.stable"
+  EXPORT_NAME: "Android"
+  EXPORT_PRESET: "Android"
+
+jobs:
+  validate-and-export:
+    name: Validate & Export Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # 2. Setup Java (required for Android export)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # 3. Setup Android SDK
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          ndk-version: r26c
+          build-tools: 34.0.0
+          cmake-version: 3.22.1
+
+      # 4. Install Godot 4.3+
+      - name: Install Godot
+        uses: firebelley/godot-export@v6.0.0
+        with:
+          godot_version: ${{ env.GODOT_VERSION_FULL }}
+          templates_version: ${{ env.GODOT_VERSION_FULL }}
+          relative_project_path: ./
+          cache: true
+          cache_key: godot-${{ env.GODOT_VERSION }}-${{ runner.os }}
+
+      # 5. Verify Godot installation
+      - name: Verify Godot installation
+        run: |
+          godot --version
+          godot --headless --help | head -20
+
+      # 6. Validate project (headless compilation check)
+      - name: Validate project (headless)
+        run: |
+          echo "Running Godot headless validation..."
+          godot --headless --check-only --quit 2>&1
+        working-directory: ./
+
+      # 7. Run project validation script (if exists)
+      - name: Run validation script
+        run: |
+          if [ -f "validate.gd" ]; then
+            echo "Running custom validation script..."
+            godot --headless --script validate.gd 2>&1
+          else
+            echo "No validate.gd found, skipping custom validation"
+          fi
+        working-directory: ./
+
+      # 8. Configure export preset (create export_presets.cfg if missing)
+      - name: Configure Android export preset
+        run: |
+          cat > export_presets.cfg << 'EOF'
+          [preset.0]
+          name="Android"
+          platform="Android"
+          runnable=true
+          dedicated_server=false
+          custom_features=""
+          export_filter="all_resources"
+          export_path="build/citylife.apk"
+          include_filter=""
+          exclude_filter=""
+          export_encrypted_pck=false
+          encryption_key=""
+          script_encryption_key=""
+
+          # Android specific
+          android/sdk_path=""
+          android/ndk_path=""
+          android/java_path=""
+          android/gradle_path=""
+          android/keystore=""
+          android/keystore_pass=""
+          android/keyalias=""
+          android/keyalias_pass=""
+          android/keystore_debug="/home/runner/.android/debug.keystore"
+          android/keystore_debug_pass="android"
+          android/keyalias_debug="androiddebugkey"
+          android/keyalias_debug_pass="android"
+          android/min_sdk=24
+          android/target_sdk=34
+          android/max_sdk=0
+          android/archs=["arm64-v8a", "armeabi-v7a"]
+          android/force_system_user=false
+          android/force_single_process=false
+          android/use_embedded_pck=true
+          android/use_apk_expansion=false
+          android/permissions=[]
+          android/features=[]
+          android/copy_assets=[]
+          android/custom_template_release=""
+          android/custom_template_debug=""
+          android/icons={}
+          android/icon_adaptive_foreground=""
+          android/icon_adaptive_background=""
+          android/icon_adaptive_legacy=""
+          android/icon_round=""
+          android/banner=""
+          android/app_name="City Life"
+          android/package="com.citylife.game"
+          android/version_code=1
+          android/version_name="1.0.0"
+          android/orientation="landscape"
+          android/access_network_state=true
+          android/access_wifi_state=false
+          android/internet=true
+          android/vibrate=false
+          android/wake_lock=false
+          android/write_external_storage=false
+          android/foreground_service=false
+          android/exclude_gdbserver=true
+          android/exclude_lldb=false
+          EOF
+          mkdir -p build
+          echo "Export preset configured"
+
+      # 9. Export Android APK (debug)
+      - name: Export Android APK (debug)
+        run: |
+          echo "Exporting Android debug APK..."
+          godot --headless --export-debug "${EXPORT_NAME}" "build/citylife-debug.apk" 2>&1
+        working-directory: ./
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          ANDROID_NDK_HOME: ${{ env.ANDROID_NDK_ROOT }}
+          JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
+
+      # 10. Verify APK was created
+      - name: Verify APK
+        run: |
+          if [ -f "build/citylife-debug.apk" ]; then
+            echo "APK created successfully!"
+            ls -lh build/citylife-debug.apk
+            file build/citylife-debug.apk
+            # Verify APK structure
+            unzip -l build/citylife-debug.apk | head -30
+          else
+            echo "ERROR: APK not found!"
+            ls -la build/
+            exit 1
+          fi
+
+      # 11. Upload APK as artifact
+      - name: Upload Android APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: citylife-android-apk
+          path: build/citylife-debug.apk
+          retention-days: 30
+          compression-level: 6
+
+      # 12. Upload validation logs (if any errors)
+      - name: Upload validation logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-logs
+          path: |
+            *.log
+            build/*.log
+          retention-days: 7
+
+      # 13. Summary
+      - name: Build summary
+        run: |
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Godot Version:** ${{ env.GODOT_VERSION_FULL }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Export Preset:** ${EXPORT_NAME}" >> $GITHUB_STEP_SUMMARY
+          echo "**APK Location:** \`build/citylife-debug.apk\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "build/citylife-debug.apk" ]; then
+            SIZE=$(du -h build/citylife-debug.apk | cut -f1)
+            echo "**APK Size:** ${SIZE}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **Build successful!** Download the APK from the artifacts." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Build failed!** Check the logs." >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ai/police_patrol_car.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/police_cruiser.tscn" id="2"]
+
+[node name="PolicePatrolCar" type="VehicleBody3D" instance=ExtResource("2")]
+script = ExtResource("1")
+
+[node name="PolicePatrolCar/RayCastForward" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -15)
+collision_mask = 7
+enabled = true
+
+[node name="PolicePatrolCar/RayCastLeft" type="RayCast3D" parent="."]
+target_position = Vector3(-3, 0, -10)
+collision_mask = 7
+enabled = true
+
+[node name="PolicePatrolCar/RayCastRight" type="RayCast3D" parent="."]
+target_position = Vector3(3, 0, -10)
+collision_mask = 7
+enabled = true

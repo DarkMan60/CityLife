@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="premier" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "premier"
+vehicle_name = "Premier"
+vehicle_class = FAMILY
+price = 25000
+stats = {'speed': 60, 'acceleration': 55, 'handling': 58, 'braking': 60, 'durability': 70}
+
+[node name="premier/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.15, 1.55, 4.8)
+position = Vector3(0, 0.775, 0)
+
+[node name="premier/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(1.95, 1.35, 4.5)
+position = Vector3(0, 0.775, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="premier/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.07, 0.58, 1.9)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="premier/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.07, 0.58, 1.9)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="premier/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.07, 0.58, -1.9)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="premier/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.07, 0.58, -1.9)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

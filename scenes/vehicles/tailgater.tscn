@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="tailgater" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "tailgater"
+vehicle_name = "Tailgater"
+vehicle_class = FAMILY
+price = 35000
+stats = {'speed': 65, 'acceleration': 60, 'handling': 60, 'braking': 65, 'durability': 75}
+
+[node name="tailgater/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.2, 1.6, 4.9)
+position = Vector3(0, 0.8, 0)
+
+[node name="tailgater/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(2.0, 1.4, 4.6)
+position = Vector3(0, 0.7999999999999999, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.6, 0.6, 0.6, 1)
+
+[node name="tailgater/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.6, 1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="tailgater/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.6, 1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="tailgater/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.6, -1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="tailgater/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.6, -1.95)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

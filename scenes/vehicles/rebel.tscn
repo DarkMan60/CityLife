@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="rebel" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "rebel"
+vehicle_name = "Rebel"
+vehicle_class = OFFROAD
+price = 40000
+stats = {'speed': 70, 'acceleration': 65, 'handling': 75, 'braking': 65, 'durability': 90}
+
+[node name="rebel/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.4, 2.0, 5.1)
+position = Vector3(0, 1.0, 0)
+
+[node name="rebel/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(2.2, 1.8, 4.8)
+position = Vector3(0, 1.0, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.4, 0.5, 0.3, 1)
+
+[node name="rebel/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.2, 0.8, 2.0)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="rebel/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.2, 0.8, 2.0)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="rebel/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.2, 0.8, -2.0)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="rebel/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.2, 0.8, -2.0)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

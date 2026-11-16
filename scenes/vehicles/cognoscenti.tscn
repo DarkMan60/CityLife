@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="cognoscenti" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "cognoscenti"
+vehicle_name = "Cognoscenti"
+vehicle_class = LUXURY
+price = 150000
+stats = {'speed': 75, 'acceleration': 70, 'handling': 65, 'braking': 70, 'durability': 85}
+
+[node name="cognoscenti/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.35, 1.55, 5.3)
+position = Vector3(0, 0.775, 0)
+
+[node name="cognoscenti/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(2.15, 1.35, 5.0)
+position = Vector3(0, 0.775, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.2, 0.2, 0.3, 1)
+
+[node name="cognoscenti/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.17, 0.62, 2.1)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="cognoscenti/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.17, 0.62, 2.1)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="cognoscenti/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.17, 0.62, -2.1)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="cognoscenti/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.17, 0.62, -2.1)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_base.gd" id="1"]
+
+[node name="sultan_rs" type="VehicleBody3D"]
+script = ExtResource("1")
+vehicle_id = "sultan_rs"
+vehicle_name = "Sultan RS"
+vehicle_class = SPORTS
+price = 75000
+stats = {'speed': 95, 'acceleration': 90, 'handling': 85, 'braking': 80, 'durability': 60}
+
+[node name="sultan_rs/CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(2.2, 1.2, 4.5)
+position = Vector3(0, 0.6, 0)
+
+[node name="sultan_rs/MeshInstance" type="MeshInstance3D" parent="."]
+mesh = BoxMesh.new()
+mesh.size = Vector3(2.0, 1.0, 4.2)
+position = Vector3(0, 0.6, 0)
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color(0.8, 0.1, 0.1, 1)
+
+[node name="sultan_rs/WheelFR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.5, 1.8)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="sultan_rs/WheelFL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.5, 1.8)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = true
+
+[node name="sultan_rs/WheelRR" type="VehicleWheel3D" parent="."]
+position = Vector3(1.1, 0.5, -1.8)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false
+
+[node name="sultan_rs/WheelRL" type="VehicleWheel3D" parent="."]
+position = Vector3(-1.1, 0.5, -1.8)
+suspension_travel = 0.3
+suspension_stiffness = 25.0
+suspension_max_force = 5000.0
+friction_slip = 1.5
+roll_influence = 0.5
+use_as_traction = true
+use_as_steering = false

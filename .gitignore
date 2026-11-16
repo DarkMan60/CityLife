@@ -1,0 +1,40 @@
+# Godot 4+ specific
+.godot/
+*.translation.csv
+
+# Build artifacts
+build/
+*.apk
+*.aab
+*.ipa
+*.exe
+*.app
+*.pck
+*.zip
+
+# Export templates
+templates/
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Android
+local.properties
+gradle/
+build.gradle
+*.keystore
+
+# User settings
+user://*
